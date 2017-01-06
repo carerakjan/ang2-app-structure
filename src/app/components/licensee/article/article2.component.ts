@@ -1,7 +1,7 @@
 import { OnInit, Input } from '@angular/core';
-import { ArticleDecorator } from '../../../decorators/article.decorator';
-import { ArticleInterface } from '../../../interfaces/article.interface';
-import { Article } from '../../../models/article.model';
+import { ArticleDecorator } from 'app/decorators/article.decorator';
+import { ArticleInterface } from 'app/interfaces/article.interface';
+import { Article } from 'app/models/article.model';
 
 @ArticleDecorator({
   selector:'app-article-second'
