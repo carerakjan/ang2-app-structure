@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Article } from './models/article.model';
+import { ArticleService } from './services/articles.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,15 @@ export class AppComponent {
 
   articles: Array<Article>;
 
-  constructor() {
-    this.articles = [
-      new Article('Angular 2', 'http://angular.io', 3),
-      new Article('Fullstack', 'http://fullstack.io', 2),
-      new Article('Angular Homepage', 'http://angular.io', 1),
-    ];
+  constructor(private articleService:ArticleService = new ArticleService()) {
+
+    this.articleService.onLoadSuccess.subscribe(function() {
+      console.log('Articles load success!!');
+    });
+
+    this.articleService.fetch().then(articles => {
+      this.articles = articles;
+    });
   }
 
   addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean {
@@ -25,6 +29,10 @@ export class AppComponent {
   }
 
   sortedArticles(): Article[] {
-    return this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
+    return (this.articles || []).sort((a: Article, b: Article) => b.votes - a.votes);
+  }
+
+  isArticlesLoad(): boolean {
+    return !!(this.articles && this.articles.length);
   }
 }

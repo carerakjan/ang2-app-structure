@@ -2,11 +2,11 @@
   <h3 class="ui header">Add a Link</h3>
   <div class="field">
     <label for="title">Title:</label>
-    <input name="title" #newtitle> <!-- changed -->
+    <input name="title" #newtitle [disabled]="!isArticlesLoad()"> <!-- changed -->
   </div>
   <div class="field">
     <label for="link">Link:</label>
-    <input name="link" #newlink> <!-- changed -->
+    <input name="link" #newlink [disabled]="!isArticlesLoad()"> <!-- changed -->
   </div>
   <!-- added this button -->
   <button (click)="addArticle(newtitle, newlink)"
